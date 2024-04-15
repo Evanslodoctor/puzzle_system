@@ -8,6 +8,7 @@ from django.conf import settings
 from datetime import date, timedelta
 from exam import models as QMODEL
 from teacher import models as TMODEL
+from django.contrib.auth import logout
 
 
 #for showing signup/login button for student
@@ -125,3 +126,12 @@ def student_marks_view(request):
     courses=QMODEL.Course.objects.all()
     return render(request,'student/student_marks.html',{'courses':courses})
   
+
+
+def logout_view(request):
+    # Logout the user
+  
+    logout(request)
+
+    # Redirect to a desired page after logout
+    return redirect('studentlogin')  # Replace 'login' with the name of your login URL pattern

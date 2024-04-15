@@ -13,8 +13,13 @@ from student import models as SMODEL
 from teacher import forms as TFORM
 from student import forms as SFORM
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LogoutView as DjangoLogoutView
 
+# Replace your LogoutView function with Django's built-in LogoutView
+logout_view = DjangoLogoutView.as_view()
 
+# Then in your urls.py, you can include the URL pattern like this:
+# path('logout', logout_view, name='logout'),
 
 def home_view(request):
     if request.user.is_authenticated:
@@ -294,3 +299,11 @@ def contactus_view(request):
     return render(request, 'exam/contactus.html', {'form':sub})
 
 
+
+
+def LogoutView(request):
+    # Logout the user
+    logout(request)
+
+    # Redirect to a desired page after logout
+    return redirect('index.html')  # Replace 'login' with the name of your login URL pattern
